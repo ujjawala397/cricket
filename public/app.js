@@ -12,6 +12,7 @@ function visualizeData(data) {
   return;
 }
 
+
 function visualizeMatchesPlayedPerYear(matchesPlayedPerYear) {
   const seriesData = [];
   for (let year in matchesPlayedPerYear) {
@@ -427,5 +428,76 @@ function visualizeStory(matchesStory) {
   });
 }
 
+// ----------------------Extra Runs Year wise-----------
+function fetchAndVisualizeDataLast() {
+  fetch("./data_runs.json")
+    .then(r => r.json())
+    .then(visualizeDataLast);
+}
 
+fetchAndVisualizeDataLast();
+
+function visualizeDataLast(dataLast) {
+  visualizeextrarunsconcededbyeach(dataLast.years);
+  return;
+}
+
+function visualizeextrarunsconcededbyeach(extrarunsconcededbyeach) {
+  const seriesDataThird = [];
+  for (let extra in extrarunsconcededbyeach) {
+    seriesDataThird.push([extra, extrarunsconcededbyeach[extra]]);
+  }
+
+  // console.log(seriesDataThird);
+
+  Highcharts.chart('extra-runs', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Extra Runs Conceded by Each Team in 2016'
+    },
+    subtitle: {
+        text: 'Source: IPL'
+    },
+    xAxis: {
+        type: 'category',
+        labels: {
+            rotation: -45,
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Extra Runs'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Extra Run in 2016: <b>{point.y}</b>'
+    },
+    series: [{
+        name: 'Extra Run',
+        data: seriesDataThird,
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    }]
+  });
+
+}
 
