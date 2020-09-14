@@ -1,5 +1,7 @@
 function topEconomicalBowlers(deliveries){
-    let result = {}; let bowl = []; let obj = [];
+    let result = {}; 
+    let bowl = []; 
+    let obj = [];
     for(let item of deliveries){
         const bowler = item.bowler;
         const match_id = parseInt(item.match_id);
