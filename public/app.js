@@ -1,3 +1,4 @@
+
 // -------------------------Total matches Played------------------------
 function fetchAndVisualizeData() {
   fetch("./data.json")
@@ -59,7 +60,7 @@ fetchAndVisualizeDataWon();
 
 function visualizeWonData(data_won) {
   visualizeWonMatches(data_won.matchesWon);
-  console.log(data_won);
+  // console.log(data_won);
   return;
 }
 
@@ -430,7 +431,7 @@ function visualizeStory(matchesStory) {
 
 // ----------------------Extra Runs Year wise-----------
 function fetchAndVisualizeDataLast() {
-  fetch("./data_runs.json")
+  fetch("./data_interactive.json")
     .then(r => r.json())
     .then(visualizeDataLast);
 }
@@ -438,24 +439,28 @@ function fetchAndVisualizeDataLast() {
 fetchAndVisualizeDataLast();
 
 function visualizeDataLast(dataLast) {
-  visualizeextrarunsconcededbyeach(dataLast.years);
+  var a=document.getElementById("years1").value;
+  console.log(a);
+  visualizeExtraRunsYearly(dataLast.years[a]);
+// console.log(dataLast.years[a]);
+  
   return;
 }
 
-function visualizeextrarunsconcededbyeach(extrarunsconcededbyeach) {
-  const seriesDataThird = [];
-  for (let extra in extrarunsconcededbyeach) {
-    seriesDataThird.push([extra, extrarunsconcededbyeach[extra]]);
+function visualizeExtraRunsYearly(RunsYearly) {
+  const seriesDataLast = [];
+  for (let year in RunsYearly) {
+    seriesDataLast.push([year, RunsYearly[year]]);
   }
 
-  // console.log(seriesDataThird);
+  // console.log(seriesDataLast);
 
-  Highcharts.chart('extra-runs', {
+  Highcharts.chart('extraRuns', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Extra Runs Conceded by Each Team in 2016'
+        text: 'Extra Runs Conceded by Each Team Year Wise'
     },
     subtitle: {
         text: 'Source: IPL'
@@ -469,6 +474,7 @@ function visualizeextrarunsconcededbyeach(extrarunsconcededbyeach) {
                 fontFamily: 'Verdana, sans-serif'
             }
         }
+ 
     },
     yAxis: {
         min: 0,
@@ -484,7 +490,7 @@ function visualizeextrarunsconcededbyeach(extrarunsconcededbyeach) {
     },
     series: [{
         name: 'Extra Run',
-        data: seriesDataThird,
+        data: seriesDataLast,
         dataLabels: {
             enabled: true,
             rotation: -90,
@@ -498,6 +504,4 @@ function visualizeextrarunsconcededbyeach(extrarunsconcededbyeach) {
         }
     }]
   });
-
 }
-

@@ -14,11 +14,11 @@
 
 <body>
     <h1>IPL Dataset visualization</h1>
-    <form method="POST" name="year" action="/">
+    <form action="/">
         Enter Year 2008-2018
         <br>
-        <input type="text" class="year">
-        <button type="submit">Submit</button>
+        <input type="text" class="year" id="years1">
+        <input onclick="fetchAndVisualizeDataLast()" type="button" value="Show">
     </form>
     <div id="extraRuns" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <div id="matches-played-per-year" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
